@@ -17,7 +17,7 @@
 ;; 
 ;; scala-mode provides scala syntax highlighting.
 
-(add-to-list 'load-path "/home/david/emacs/modes/scala-mode")
+(add-to-list 'load-path "~/dotfiles/emacs/modes/scala-mode")
 (require 'scala-mode-auto)
 
 ;; yasnippets disabled due to a startup error that I need to
@@ -43,19 +43,19 @@
 ;; project structure imposed by maven, so it's easier for me to load 
 ;; individual files in liftweb projects from within emacs.
 
-(add-to-list 'load-path "~/emacs/eproject")
-(require 'eproject)
-(require 'eproject-extras)
+;;(add-to-list 'load-path "~/dotfiles/emacs/eproject")
+;;(require 'eproject)
+;;(require 'eproject-extras)
 
 ;; Project files for scala liftweb projects
-(define-project-type liftweb (generic) (look-for "pom.xml"))
+;;(define-project-type liftweb (generic) (look-for "pom.xml"))
 
 
 ;; window-number
 ;;
 ;; For easier window modification
 
-(add-to-list 'load-path "~/emacs/window-number/window-number.el")
+(add-to-list 'load-path "~/dotfiles/emacs/window-number/window-number.el")
 (autoload 'window-number-mode "window-number" "comment" t)
 (autoload 'window-number-meta-mode "window-number" "comment" t)
 
@@ -112,35 +112,54 @@
 ;; Load CEDET.
 ;; See cedet/common/cedet.info for configuration details.
 
-(add-to-list 'load-path (expand-file-name "~/emacs/jde/lisp"))
-(add-to-list 'load-path (expand-file-name "~/emacs/cedet/common"))
-(load-file (expand-file-name "~/emacs/cedet/common/cedet.el"))
+;;(add-to-list 'load-path (expand-file-name "~/dotfiles/emacs/jde/lisp"))
+;;(add-to-list 'load-path (expand-file-name "~/dotfiles/emacs/cedet/common"))
+;;(load-file (expand-file-name "~/dotfiles/emacs/cedet/common/cedet.el"))
 ;; (add-to-list 'load-path (expand-file-name "~/emacs/elib"))
 
 ;; If you want Emacs to defer loading the JDE until you open a 
 ;; Java file, edit the following line
-(setq defer-loading-jde nil)
+;;(setq defer-loading-jde nil)
 ;; to read:
 ;;
 ;;  (setq defer-loading-jde t)
 ;;
 
-(if defer-loading-jde
-    (progn
-      (autoload 'jde-mode "jde" "JDE mode." t)
-      (setq auto-mode-alist
-	    (append
-	     '(("\\.java\\'" . jde-mode))
-	     auto-mode-alist)))
-  (require 'jde))
+;;(if defer-loading-jde
+;;    (progn
+;;      (autoload 'jde-mode "jde" "JDE mode." t)
+;;      (setq auto-mode-alist;
+;;	    (append
+;;	     '(("\\.java\\'" . jde-mode))
+;;	     auto-mode-alist)))
+;;  (require 'jde))
 
 
 
-(defun my-jde-mode-hook ()
-  (setq c-basic-offset 2))
+;;(defun my-jde-mode-hook ()
+;;  (setq c-basic-offset 2))
 
-(add-hook 'jde-mode-hook 'my-jde-mode-hook)
+;;(add-hook 'jde-mode-hook 'my-jde-mode-hook)
 
+
+;; OpenBSD C Style
+
+
+
+ (c-add-style "openbsd"
+              '("bsd"
+                (indent-tabs-mode . t)
+                (defun-block-intro . 8)
+                (statement-block-intro . 8)
+                (statement-case-intro . 8)
+                (substatement-open . 4)
+                (substatement . 8)
+                (arglist-cont-nonempty . 4)
+                (inclass . 8)
+                (knr-argdecl-intro . 8)))
+
+(setq c-default-style "openbsd"
+          c-basic-offset 4)
 
 ;; Misc
 ;;
